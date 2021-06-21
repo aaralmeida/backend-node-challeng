@@ -1,5 +1,3 @@
-'use strict'
-
 const insertSchema = {
     body: {
         type: 'object',

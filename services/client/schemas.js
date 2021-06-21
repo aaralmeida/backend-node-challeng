@@ -1,11 +1,9 @@
-'use strict'
-
 const insertSchema = {
     body: {
         type: 'object',
         properties: {
             full_name: { type: 'string' },
-            gender: { type: 'string' },
+            gender: { type: 'string', enum: ["F", "M"] },
             birthdate: { type: 'string' },
             city: { type: 'string' }
         },
@@ -20,7 +18,7 @@ const updateSchema = {
         type: 'object',
         properties: {
             full_name: { type: 'string' },
-            gender: { type: 'string' },
+            gender: { type: 'string', enum: ["F", "M"] },
             birthdate: { type: 'string' },
             city: { type: 'string' },
         }
@@ -28,16 +26,6 @@ const updateSchema = {
 }
 
 const findOneSchema = {
-    // querystring: {
-    //     type: 'object',
-    //     required: ['id'],
-    //     properties: {
-    //         id: {
-    //             type: 'string',
-    //             pattern: '^[0-9a-fA-F]{24}'
-    //         }
-    //     }
-    // },
     response: {
         200: {
             type: 'object',
@@ -47,16 +35,6 @@ const findOneSchema = {
 }
 
 const deleteSchema = {
-    // querystring: {
-    //     type: 'object',
-    //     required: ['id'],
-    //     properties: {
-    //         id: {
-    //             type: 'string',
-    //             pattern: '^[0-9a-fA-F]{24}'
-    //         }
-    //     }
-    // },
     response: {
         200: {
             type: 'object',
