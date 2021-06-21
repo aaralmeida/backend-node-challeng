@@ -6,7 +6,7 @@ var { insert } = require('../../services/client/service')
 const DB_USER = 'root',
     DB_PASSWORD = 'root',
     DB_HOST = 'localhost',
-    DB_NAME = 'pay_trend_api_test'
+    DB_NAME = 'backend_node_challeng_test'
 
 
 describe('Client service', () => {
