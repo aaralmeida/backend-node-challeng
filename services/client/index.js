@@ -11,10 +11,13 @@ module.exports = async function(fastify) {
     fastify.setErrorHandler(function(error, request, reply) {
         switch (error.message) {
             case errors.NOT_FOUND:
-                reply.code(404)
-                break
+                reply.code(404);
+                break;
+            case errors.INVALID_OBJECT_ID:
+                reply.code(400);
+                break;
             default:
-                reply.code(500)
+                reply.code(500);
         }
 
         reply.send(error)

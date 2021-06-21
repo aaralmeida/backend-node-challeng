@@ -32,7 +32,6 @@ exports.findOne = async(clientId) => {
         let checkClientId = mongoose.Types.ObjectId.isValid(clientId)
         if (checkClientId) {
             let client = await Client.findById(clientId).populate('city');
-            console.log(client)
             if (!client) {
                 throw new Error(errors.NOT_FOUND)
             }
