@@ -9,31 +9,51 @@ module.exports = async function(fastify) {
     fastify.get('/:clientId', { schema: findOneSchema }, findByIdHandle)
     fastify.delete('/:clientId', { schema: deleteSchema }, deleteHandle)
     fastify.setErrorHandler(function(error, request, reply) {
-        const message = error.message
-        if (errors[message]) {
-            reply.code(412)
+        switch (error.message) {
+            case errors.NOT_FOUND:
+                reply.code(404)
+                break
+            default:
+                reply.code(500)
         }
+
         reply.send(error)
     })
 }
 
 
 async function insertHandler(req, reply) {
-    const client = await clientService.insert(req.body)
-    reply.code(200).send(client);
+    try {
+        const client = await clientService.insert(req.body)
+        reply.code(200).send(client);
+    } catch (error) {
+        return error
+    }
 }
 
 async function updateHandler(req, reply) {
-    const client = await clientService.update(req.params.clientId, req.body)
-    reply.code(200).send(client);
+    try {
+        const client = await clientService.update(req.params.clientId, req.body)
+        reply.code(200).send(client);
+    } catch (error) {
+        return error
+    }
 }
 
 async function findByIdHandle(req, reply) {
-    const client = await clientService.findOne(req.params.clientId)
-    reply.code(200).send(client);
+    try {
+        const client = await clientService.findOne(req.params.clientId)
+        reply.code(200).send(client);
+    } catch (error) {
+        return error
+    }
 }
 
 async function deleteHandle(req, reply) {
-    const client = await clientService.delete(req.params.clientId)
-    reply.code(200).send(client);
+    try {
+        const client = await clientService.delete(req.params.clientId)
+        reply.code(200).send(client);
+    } catch (error) {
+        return error
+    }
 }

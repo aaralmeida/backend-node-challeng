@@ -13,40 +13,18 @@ const insertSchema = {
             required: ['full_name', 'gender', 'birthdate', 'city']
         }]
     },
-    // response: {
-    //     200: {
-    //         type: 'object',
-    //         required: ['clientId'],
-    //         properties: {
-    //             clientId: { type: 'string' }
-    //         },
-    //         additionalProperties: false
-    //     }
-    // }
 }
 
 const updateSchema = {
-    // body: {
-    //     type: 'object',
-    //     properties: {
-    //         client_id: { type: 'string' },
-    //         name: { type: 'string' },
-    //         email: { type: 'string' },
-    //         phone: { type: 'string' },
-    //         document: { type: 'string' },
-    //         address: { type: 'object' }
-    //     }
-    // },
-    // response: {
-    //     200: {
-    //         type: 'object',
-    //         required: ['clientId'],
-    //         properties: {
-    //             clientId: { type: 'string' }
-    //         },
-    //         additionalProperties: false
-    //     }
-    // }
+    body: {
+        type: 'object',
+        properties: {
+            full_name: { type: 'string' },
+            gender: { type: 'string' },
+            birthdate: { type: 'string' },
+            city: { type: 'string' },
+        }
+    },
 }
 
 const findOneSchema = {
@@ -69,7 +47,7 @@ const findOneSchema = {
 }
 
 const deleteSchema = {
-    // params: {
+    // querystring: {
     //     type: 'object',
     //     required: ['id'],
     //     properties: {

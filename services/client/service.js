@@ -1,56 +1,61 @@
 const Client = require('./models/Client')
-    // const errors = require('../errors')
-    // const mongoose = require('mongoose')
+const errors = require('../../utils/errors')
+const mongoose = require('mongoose')
+
 exports.insert = async(requestBody) => {
-    let writeResult
     try {
-        writeResult = await Client.create(requestBody)
-        return writeResult
+        let client = await Client.create(requestBody)
+        return client
     } catch (e) {
         throw e
     }
-    return writeResult._id
 }
 
-exports.update = async(id, requestBody) => {
-    let writeResult
+exports.update = async(clientId, requestBody) => {
     try {
-        writeResult = await Client.findByIdAndUpdate(id, requestBody)
+        let checkClientId = mongoose.Types.ObjectId.isValid(clientId)
+        if (checkClientId) {
+            let client = await Client.findByIdAndUpdate(clientId, requestBody)
+            if (!client) {
+                throw new Error(errors.NOT_FOUND)
+            }
+            return client
+        }
+        throw new Error(errors.INVALID_OBJECT_ID)
     } catch (e) {
         throw e
     }
-    return writeResult
 }
 
-exports.findOne = async(id) => {
-    let client
+exports.findOne = async(clientId) => {
     try {
-        client = await Client.findById(id).populate('city');
-        if (!client)
-            return []
+        let checkClientId = mongoose.Types.ObjectId.isValid(clientId)
+        if (checkClientId) {
+            let client = await Client.findById(clientId).populate('city');
+            console.log(client)
+            if (!client) {
+                throw new Error(errors.NOT_FOUND)
+            }
+            return client
+        }
+        throw new Error(errors.INVALID_OBJECT_ID)
     } catch (e) {
         throw e
     }
-    return client
 }
 
-exports.findAllClientsByProduct = async(products) => { // REFATORAR PARA USAR COMO GROUP POR PRODUTOS
-    try {
-        const clients = await Client.aggregate([{
-                $match: { product_id: { $in: products } }
-            }])
-            .lookup({ from: 'products', localField: 'product_id', foreignField: '_id', as: 'product' })
-        return { clients, error: null }
-    } catch (e) {
-        return { clients: null, error: 'Falha ao recuperar dados' }
-    }
-}
 
 exports.delete = async(clientId) => {
-    //TODO: Tratar o erro caso o usuário não seja encontrado
     try {
-        let deleted = await Client.findByIdAndDelete(clientId)
-        return deleted
+        let checkClientId = mongoose.Types.ObjectId.isValid(clientId)
+        if (checkClientId) {
+            let clientDeleted = await Client.findByIdAndDelete(clientId)
+            if (!clientDeleted) {
+                throw new Error(errors.NOT_FOUND)
+            }
+            return deleted
+        }
+        throw new Error(errors.INVALID_OBJECT_ID)
     } catch (e) {
         throw e
     }
