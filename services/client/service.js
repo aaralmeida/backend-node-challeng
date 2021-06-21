@@ -56,7 +56,7 @@ exports.delete = async(clientId) => {
             if (!clientDeleted) {
                 throw new Error(errors.NOT_FOUND)
             }
-            return deleted
+            return clientDeleted
         }
         throw new Error(errors.INVALID_OBJECT_ID)
     } catch (e) {
