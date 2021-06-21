@@ -25,7 +25,7 @@ exports.update = async(id, requestBody) => {
 exports.findOne = async(id) => {
     let client
     try {
-        client = await Client.findById(id)
+        client = await Client.findById(id).populate('city');
         if (!client)
             return []
     } catch (e) {

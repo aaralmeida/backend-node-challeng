@@ -1,28 +1,16 @@
 'use strict'
 
-// full_name: {
-//     type: String,
-//     required: true
-// },
-// gender: {
-//     type: String,
-//     enum: ['M', 'F'], // digital, physical
-//     required: true
-// },
-// birth_date: {
-//     required: true,
-//     type: Date
-// },
-
 const insertSchema = {
     body: {
         type: 'object',
         properties: {
             full_name: { type: 'string' },
             gender: { type: 'string' },
+            birthdate: { type: 'string' },
+            city: { type: 'string' }
         },
         anyOf: [{
-            required: ['full_name', 'gender']
+            required: ['full_name', 'gender', 'birthdate', 'city']
         }]
     },
     // response: {

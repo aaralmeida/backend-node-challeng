@@ -10,11 +10,14 @@ const ClientSchema = new mongoose.Schema({
         enum: ['M', 'F'], // digital, physical
         required: true
     },
-    // birth_date: {
-    //     required: true,
-    //     type: Date
-    // },
-    //TODO: IMPLEMENT CITY
+    birthdate: {
+        required: true,
+        type: Date
+    },
+    city: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'City',
+    }
 }, {
     timestamps: {
         createdAt: 'created_at',
