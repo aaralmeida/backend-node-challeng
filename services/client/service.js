@@ -4,8 +4,12 @@ const mongoose = require('mongoose')
 
 exports.insert = async(requestBody) => {
     try {
-        let client = await Client.create(requestBody)
-        return client
+        let checkCityId = mongoose.Types.ObjectId.isValid(requestBody.city)
+        if (checkCityId) {
+            let client = await Client.create(requestBody)
+            return client
+        }
+        throw new Error(errors.INVALID_OBJECT_ID)
     } catch (e) {
         throw e
     }
