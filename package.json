@@ -7,7 +7,7 @@
         "pretest": "eslint --ignore-path .gitignore .",
         "lint": "standard | snazzy",
         "coverage": "npm run unit -- --cov --coverage-report=text --coverage-report=html",
-        "unit": "mocha --recursive --exit",
+        "unit": "mocha --recursive --exit --timeout 15000",
         "start": "fastify start index.js",
         "startnodemon": "nodemon --exec 'npm start -- --log-level trace --port 3001'"
     },
