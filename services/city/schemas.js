@@ -16,9 +16,8 @@ const insertSchema = {
             properties: {
                 name: { type: 'string' },
                 state: { type: 'string' },
-
             },
-            additionalProperties: false
+            additionalProperties: true
         }
     }
 }
@@ -34,7 +33,7 @@ const findByNameSchema = {
                 name: { type: 'string' },
                 state: { type: 'string' },
             },
-            additionalProperties: false
+            additionalProperties: true
         }
     }
 }

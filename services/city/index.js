@@ -18,11 +18,19 @@ module.exports = async function(fastify, opts) {
 
 
 async function insertHandler(req, reply) {
-    const city = await cityService.insert(req.body)
-    reply.code(200).send(city);
+    try {
+        const city = await cityService.insert(req.body)
+        reply.code(200).send(city);
+    } catch (error) {
+        return error
+    }
 }
 
 async function findHandle(req, reply) {
-    const cities = await cityService.find(req.query.name, req.query.state);
-    reply.code(200).send(cities);
+    try {
+        const cities = await cityService.find(req.query.name, req.query.state);
+        reply.code(200).send(cities);
+    } catch (error) {
+        return error
+    }
 }

@@ -3,7 +3,6 @@ const City = require('./models/City')
 exports.insert = async(requestBody) => {
     try {
         let city = await City.create(requestBody)
-        console.log(city);
         return city
     } catch (e) {
         throw e
