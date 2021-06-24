@@ -1,61 +1,61 @@
 const insertSchema = {
     body: {
-        type: 'object',
+        type: "object",
         properties: {
-            name: { type: 'string' },
-            state: { type: 'string' },
+            name: { type: "string" },
+            state: { type: "string" },
         },
         anyOf: [{
-            required: ['name', 'state']
-        }]
+            required: ["name", "state"],
+        }],
     },
     response: {
         200: {
-            type: 'object',
-            required: ['name', 'state'],
+            type: "object",
+            required: ["name", "state"],
             properties: {
-                name: { type: 'string' },
-                state: { type: 'string' },
+                name: { type: "string" },
+                state: { type: "string" },
             },
-            additionalProperties: true
-        }
-    }
-}
+            additionalProperties: true,
+        },
+    },
+};
 
 const findByNameSchema = {
     queryString: {
-        name: { type: 'string' },
+        name: { type: "string" },
     },
     response: {
         200: {
-            type: 'object',
+            type: "object",
             properties: {
-                name: { type: 'string' },
-                state: { type: 'string' },
+                name: { type: "string" },
+                state: { type: "string" },
             },
-            additionalProperties: true
-        }
-    }
-}
+            additionalProperties: true,
+        },
+    },
+};
 
 const findByStateSchema = {
     queryString: {
-        state: { type: 'string' },
+        state: { type: "string" },
     },
     response: {
         200: {
-            type: 'object',
+            type: "object",
             properties: {
-                name: { type: 'string' },
-                state: { type: 'string' },
+                name: { type: "string" },
+                state: { type: "string" },
             },
-            additionalProperties: false
-        }
-    }
-}
+            additionalProperties: false,
+        },
+    },
+};
 
 module.exports = {
     insertSchema,
     findByNameSchema,
-    findByStateSchema
-}
+    findByStateSchema,
+};

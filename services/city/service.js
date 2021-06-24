@@ -1,26 +1,18 @@
-const City = require('./models/City')
+const City = require("./models/City");
 
-exports.insert = async(requestBody) => {
-    try {
-        let city = await City.create(requestBody)
-        return city
-    } catch (e) {
-        throw e
-    }
-}
+exports.insert = async (requestBody) => {
+    const city = await City.create(requestBody);
+    return city;
+};
 
-exports.find = async(name, state) => {
-    try {
-        $query = {}
-        if (name) {
-            $query['name'] = name;
-        }
-        if (state) {
-            $query['state'] = state;
-        }
-        const cities = await City.find($query);
-        return cities ? cities : [];
-    } catch (e) {
-        throw e
+exports.find = async (name, state) => {
+    const $query = {};
+    if (name) {
+        $query.name = name;
     }
-}
+    if (state) {
+        $query.state = state;
+    }
+    const cities = await City.find($query);
+    return cities || [];
+};

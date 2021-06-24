@@ -1,28 +1,27 @@
-const { insertSchema, findSchema } = require('./schemas')
+const { insertSchema, findSchema } = require("./schemas");
 
-const errors = require('../../utils/errors')
-const cityService = require('./service.js')
+const errors = require("../../utils/errors");
+const cityService = require("./service");
 
-module.exports = async function(fastify, opts) {
-    fastify.post('/', { schema: insertSchema }, insertHandler)
-    fastify.get('/', { schema: findSchema }, findHandle)
+module.exports = async function (fastify) {
+    fastify.post("/", { schema: insertSchema }, insertHandler);
+    fastify.get("/", { schema: findSchema }, findHandle);
 
-    fastify.setErrorHandler(function(error, request, reply) {
-        const message = error.message
+    fastify.setErrorHandler((error, request, reply) => {
+        const { message } = error;
         if (errors[message]) {
-            reply.code(412)
+            reply.code(412);
         }
-        reply.send(error)
-    })
-}
-
+        reply.send(error);
+    });
+};
 
 async function insertHandler(req, reply) {
     try {
-        const city = await cityService.insert(req.body)
+        const city = await cityService.insert(req.body);
         reply.code(200).send(city);
     } catch (error) {
-        return error
+        return error;
     }
 }
 
@@ -31,6 +30,6 @@ async function findHandle(req, reply) {
         const cities = await cityService.find(req.query.name, req.query.state);
         reply.code(200).send(cities);
     } catch (error) {
-        return error
+        return error;
     }
 }
