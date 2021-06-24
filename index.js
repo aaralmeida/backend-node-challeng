@@ -10,7 +10,6 @@ mongoose.connect(`mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB
     })
     .catch(err => {
         console.log(err);
-        console.log("teste");
     })
 
 module.exports = async function(fastify, opts) {

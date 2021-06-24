@@ -7,6 +7,10 @@ services:
             - MONGO_INITDB_ROOT_USERNAME=root
             - MONGO_INITDB_ROOT_PASSWORD=root
             - MONGO_INITDB_DATABASE=backend-node-challeng
+        ports: 
+            - "27017:27017"
+        networks: 
+            - mongo
     mongo-express:
         image: mongo-express
         environment:
@@ -21,4 +25,9 @@ services:
         links:
             - mongo
         ports:
-          - "8081:8081"
+            - "8081:8081"
+        networks: 
+            - mongo
+networks: 
+    mongo: 
+        driver: bridge
